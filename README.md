@@ -77,5 +77,29 @@ Suppose that I have 10+ browserr windows. It's difficult to create 10 variables 
 
 I cannot switch to a window with the page title, only with the window ID.
 
+Now, my requirement is that I have multiple browser windows open and want to close a specific window of choice. Eg, to close the Parent, but keep the Child Window open, use the same loop as above:
 
+	for window_id in window_ids:
+		driver.switch_to.window(window_id)
+	if driver.title == "OrangeHRM":
+		driver.close()
+
+Currently I have only 2 windows open. What if I have many and want to close a few of those? Capture the page titles with _driver.title_ and specify the titles to close:
+
+	if driver.title == "abc" or driver.title == "xyz":
+		driver.close()
+
+I can put any number of conditions with the 'or' operator and close any number of windows. As soon as the title conditions match, only those windows close. And the rest stay open. The loop helps achieve it.
+
+	for window_id in window_ids:
+		driver.switch_to.window(window_id)
+	if driver.title == "abc" or
+	   driver.title == "def" or
+	   ...
+	   driver.title == "xyz":
+		driver.close()
+
+The _.close()_ command closes a single browser at a time. The above command in the loop closes all browser windows, one at a time.
+
+When I want to close specific window(s) of choice, I use the above _if_ statement.
 
